@@ -1,16 +1,17 @@
 ﻿using SudokuConsole.Contoller;
+using SudokuConsole.Model;
 using SudokuConsole.View;
 
-SudokuController sudokuController;
+SudokuController sudokuController = new();
 
-View4x4 view4 = new();
-sudokuController = new(view4);
+sudokuController.View = new View4x4();
+sudokuController.Model = new SudokuModel4x4();
 sudokuController.Start();
 
-View9x9 view9 = new();
-sudokuController.View = view9;
-sudokuController.Start();
+//sudokuController.View = new View9x9();
+//sudokuController.Model = new SudokuModel9x9();
+//sudokuController.Start();
 
-ViewSamourai viewSamourai = new();
-sudokuController.View = viewSamourai;
-sudokuController.Start();
+//sudokuController.View = new ViewSamourai();
+//sudokuController.Model = new SudokuModelSamourai();
+//sudokuController.Start();

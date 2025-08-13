@@ -1,8 +1,15 @@
-﻿namespace SudokuConsole.View;
+﻿using SudokuConsole.Model;
+
+namespace SudokuConsole.View;
 
 internal class ViewSamourai : ISudokuView
 {
-    public void Display()
+    public void Display(ISudokuModel model)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DisplayEmptyGrid()
     {
         Console.WriteLine("Samourai");
         Console.WriteLine("""
