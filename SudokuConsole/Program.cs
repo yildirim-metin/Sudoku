@@ -1,13 +1,16 @@
-﻿using SudokuConsole.View;
+﻿using SudokuConsole.Contoller;
+using SudokuConsole.View;
+
+SudokuController sudokuController;
 
 View4x4 view4 = new();
-Console.WriteLine("4x4");
-view4.Display();
+sudokuController = new(view4);
+sudokuController.Start();
 
 View9x9 view9 = new();
-Console.WriteLine("9x9");
-view9.Display();
+sudokuController.View = view9;
+sudokuController.Start();
 
 ViewSamourai viewSamourai = new();
-Console.WriteLine("Samourai");
-viewSamourai.Display();
+sudokuController.View = viewSamourai;
+sudokuController.Start();

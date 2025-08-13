@@ -1,9 +1,10 @@
 ﻿namespace SudokuConsole.View;
 
-internal class ViewSamourai
+internal class ViewSamourai : ISudokuView
 {
     public void Display()
     {
+        Console.WriteLine("Samourai");
         Console.WriteLine("""
             +-------+-------+-------+       +-------+-------+-------+        
             | . . . | . . . | . . . |       | . . . | . . . | . . . |        
