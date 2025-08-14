@@ -5,7 +5,7 @@ namespace SudokuConsole.View;
 
 internal class View4x4 : ISudokuView
 {
-    public string Value = """
+    private readonly string _canva = """
         +-----+-----+
         | . . | . . |
         | . . | . . |
@@ -19,11 +19,11 @@ internal class View4x4 : ISudokuView
     {
         StringBuilder stringBuilder = new();
         int i = 0;
-        foreach (char c in Value)
+        foreach (char c in _canva)
         {
             stringBuilder.Append(c == '.' ? $"{{{i++}}}" : c);
         }
-        Value = stringBuilder.ToString();
+        _canva = stringBuilder.ToString();
     }
 
     public void Display(ISudokuModel model)
@@ -40,7 +40,7 @@ internal class View4x4 : ISudokuView
             }
         }
 
-        Console.WriteLine(string.Format(Value, stringTab));
+        Console.WriteLine(string.Format(_canva, stringTab));
     }
 
     public void DisplayEmptyGrid()
