@@ -16,14 +16,4 @@ internal class SudokuModel4x4 : ISudokuModel
     {
         _values = new char[MaxSize, MaxSize];
     }
-
-    public void AddValue(int row, int column, char value)
-    {
-        this[row, column] = value;
-    }
-
-    public char GetValue(int row, int column)
-    {
-        return this[row, column];
-    }
 }

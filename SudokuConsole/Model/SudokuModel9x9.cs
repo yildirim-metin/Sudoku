@@ -2,21 +2,17 @@
 
 internal class SudokuModel9x9 : ISudokuModel
 {
-    const int MAX_SIZE = 9;
+    public short MaxSize => 9;
 
-    private readonly char[,] _values = new char[MAX_SIZE, MAX_SIZE];
-
-    public char this[int row, int column] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    public short MaxSize => throw new NotImplementedException();
-
-    public void AddValue(int row, int column, char value)
+    private readonly char[,] _values;
+    public char this[int row, int column] 
     {
-        _values[row - 1, column - 1] = value;
+        get => _values[row, column];
+        set => _values[row, column] = value;
     }
 
-    public char GetValue(int row, int column)
+    public SudokuModel9x9()
     {
-        return _values[row - 1, column - 1];
+        _values = new char[MaxSize, MaxSize];
     }
 }
