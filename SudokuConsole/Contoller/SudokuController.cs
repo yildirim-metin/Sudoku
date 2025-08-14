@@ -14,9 +14,9 @@ internal class SudokuController
         {
             View.DisplayEmptyGrid();
             Model.AddValue(2, 3, '4');
-            Model.AddValue(1, 4, '2');
+            Model.AddValue(1, 3, '2');
             Model.AddValue(1, 1, '1');
-            Model.AddValue(4, 3, '9');
+            Model.AddValue(3, 3, '9');
             View.Display(Model!);
         }
     }

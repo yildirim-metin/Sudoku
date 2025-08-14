@@ -29,12 +29,12 @@ internal class View4x4 : ISudokuView
     public void Display(ISudokuModel model)
     {
         int cpt = 0;
-        string[] stringTab = new string[4*4];
-        for (int row = 0; row < 4; row++)
+        string[] stringTab = new string[model.MaxSize * model.MaxSize];
+        for (int row = 0; row < model.MaxSize; row++)
         {
-            for (int column = 0; column < 4; column++)
+            for (int column = 0; column < model.MaxSize; column++)
             {
-                var c = char.ToString(model.GetValue(row + 1, column + 1));
+                var c = char.ToString(model.GetValue(row, column));
                 stringTab[cpt] = c != "\0" ? c : " ";
                 cpt++;
             }
