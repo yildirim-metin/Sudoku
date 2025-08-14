@@ -6,6 +6,8 @@ internal class SudokuModel9x9 : ISudokuModel
 
     private readonly char[,] _values = new char[MAX_SIZE, MAX_SIZE];
 
+    public char this[int row, int column] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
     public short MaxSize => throw new NotImplementedException();
 
     public void AddValue(int row, int column, char value)
