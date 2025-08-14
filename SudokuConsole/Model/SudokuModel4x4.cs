@@ -4,16 +4,37 @@ internal class SudokuModel4x4 : ISudokuModel
 {
     public short MaxSize => 4;
 
-    private readonly char[,] _values;
+    private readonly Cell[,] _values;
 
     public char this[int row, int column]
     {
-        get => _values[row, column];
-        set => _values[row, column] = value;
+        get
+        {
+            if (_values[row, column] is not null)
+            {
+                return _values[row, column].Value;
+            }
+            else
+            {
+                return '\0';
+            }
+        }
+        set
+        {
+            Cell cell = new(value, true);
+            _values[row, column] = cell;
+        }
     }
 
     public SudokuModel4x4()
     {
-        _values = new char[MaxSize, MaxSize];
+        _values = new Cell[MaxSize, MaxSize];
+        for (int i = 0; i < MaxSize; i++)
+        {
+            for (int j = 0; j < MaxSize; j++)
+            {
+                _values[i, j] = new Cell();
+            }
+        }
     }
 }

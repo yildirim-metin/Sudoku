@@ -4,15 +4,29 @@ internal class SudokuModel9x9 : ISudokuModel
 {
     public short MaxSize => 9;
 
-    private readonly char[,] _values;
+    private readonly Cell[,] _values;
     public char this[int row, int column] 
     {
-        get => _values[row, column];
-        set => _values[row, column] = value;
+        get
+        {
+            if (_values[row, column] is not null)
+            {
+                return _values[row, column].Value;
+            }
+            else
+            {
+                return '\0';
+            }
+        }
+        set
+        {
+            Cell cell = new(value, true);
+            _values[row, column] = cell;
+        }
     }
 
     public SudokuModel9x9()
     {
-        _values = new char[MaxSize, MaxSize];
+        _values = new Cell[MaxSize, MaxSize];
     }
 }
