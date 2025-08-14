@@ -5,7 +5,7 @@ internal class Cell
     public char Value { get; set; }
     public bool IsLock { get; set; }
 
-    public Cell() : this('\0')
+    public Cell() : this(ISudokuModel.EMPTY)
     {
     }
 

@@ -16,7 +16,7 @@ internal class SudokuModel4x4 : ISudokuModel
             }
             else
             {
-                return '\0';
+                return ISudokuModel.EMPTY;
             }
         }
         set

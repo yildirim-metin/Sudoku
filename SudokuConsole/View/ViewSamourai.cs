@@ -51,13 +51,13 @@ internal class ViewSamourai : ISudokuView
     public void Display(ISudokuModel model)
     {
         int index = 0;
-        string[] values = new string[model.MaxSize * (model.MaxSize - 4) * 3 * 6];
+        object[] values = new object[model.MaxSize * (model.MaxSize - 4) * 3 * 6];
         for (int row = 0; row < model.MaxSize; row++)
         {
             for (int column = 0; column < model.MaxSize; column++)
             {
-                string s = char.ToString(model[row, column]);
-                values[index] = s != "\0" ? s : " ";
+                char c = model[row, column];
+                values[index] = c != ISudokuModel.EMPTY ? c : " ";
                 index++;
             }
         }

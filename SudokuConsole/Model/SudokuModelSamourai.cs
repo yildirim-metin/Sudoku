@@ -15,7 +15,7 @@ internal class SudokuModelSamourai : ISudokuModel
             }
             else
             {
-                return '\0';
+                return ISudokuModel.EMPTY;
             }
         }
         set
