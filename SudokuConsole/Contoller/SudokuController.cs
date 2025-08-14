@@ -17,6 +17,7 @@ internal class SudokuController
             Model[1, 3] = '2';
             Model[1, 1] = '1';
             Model[3, 3] = '9';
+            if (Model is SudokuModel9x9) Model[8, 8] = '9';
             View.Display(Model!);
         }
     }

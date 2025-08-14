@@ -28,19 +28,19 @@ internal class View4x4 : ISudokuView
 
     public void Display(ISudokuModel model)
     {
-        int cpt = 0;
-        string[] stringTab = new string[model.MaxSize * model.MaxSize];
+        int index = 0;
+        string[] values = new string[model.MaxSize * model.MaxSize];
         for (int row = 0; row < model.MaxSize; row++)
         {
             for (int column = 0; column < model.MaxSize; column++)
             {
-                string c = char.ToString(model[row, column]);
-                stringTab[cpt] = c != "\0" ? c : " ";
-                cpt++;
+                string s = char.ToString(model[row, column]);
+                values[index] = s != "\0" ? s : " ";
+                index++;
             }
         }
 
-        Console.WriteLine(string.Format(_canva, stringTab));
+        Console.WriteLine(string.Format(_canva, values));
     }
 
     public void DisplayEmptyGrid()
