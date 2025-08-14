@@ -34,7 +34,7 @@ internal class View4x4 : ISudokuView
         {
             for (int column = 0; column < model.MaxSize; column++)
             {
-                var c = char.ToString(model.GetValue(row, column));
+                string c = char.ToString(model[row, column]);
                 stringTab[cpt] = c != "\0" ? c : " ";
                 cpt++;
             }
