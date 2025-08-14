@@ -1,12 +1,68 @@
 ﻿using SudokuConsole.Model;
+using System.Text;
 
 namespace SudokuConsole.View;
 
 internal class ViewSamourai : ISudokuView
 {
+    private readonly string _canva = """
+            +-------+-------+-------+       +-------+-------+-------+        
+            | . . . | . . . | . . . |       | . . . | . . . | . . . |        
+            | . . . | . . . | . . . |       | . . . | . . . | . . . |        
+            | . . . | . . . | . . . |       | . . . | . . . | . . . |        
+            +-------+-------+-------+       +-------+-------+-------+        
+            | . . . | . . . | . . . |       | . . . | . . . | . . . |        
+            | . . . | . . . | . . . |       | . . . | . . . | . . . |        
+            | . . . | . . . | . . . |       | . . . | . . . | . . . |        
+            +-------+-------+-------+-------+-------+-------+-------+
+            | . . . | . . . | . . . | . . . | . . . | . . . | . . . |
+            | . . . | . . . | . . . | . . . | . . . | . . . | . . . |
+            | . . . | . . . | . . . | . . . | . . . | . . . | . . . |
+            +-------+-------+-------+-------+-------+-------+-------+
+                            | . . . | . . . | . . . |
+                            | . . . | . . . | . . . |
+                            | . . . | . . . | . . . |
+            +-------+-------+-------+-------+-------+-------+-------+
+            | . . . | . . . | . . . | . . . | . . . | . . . | . . . |
+            | . . . | . . . | . . . | . . . | . . . | . . . | . . . |
+            | . . . | . . . | . . . | . . . | . . . | . . . | . . . |
+            +-------+-------+-------+-------+-------+-------+-------+
+            | . . . | . . . | . . . |       | . . . | . . . | . . . |
+            | . . . | . . . | . . . |       | . . . | . . . | . . . |
+            | . . . | . . . | . . . |       | . . . | . . . | . . . |
+            +-------+-------+-------+       +-------+-------+-------+                                                
+            | . . . | . . . | . . . |       | . . . | . . . | . . . |
+            | . . . | . . . | . . . |       | . . . | . . . | . . . |
+            | . . . | . . . | . . . |       | . . . | . . . | . . . |
+            +-------+-------+-------+       +-------+-------+-------+
+            """;
+
+    public ViewSamourai()
+    {
+        StringBuilder stringBuilder = new();
+        int i = 0;
+        foreach (char c in _canva)
+        {
+            stringBuilder.Append(c == '.' ? $"{{{i++}}}" : c);
+        }
+        _canva = stringBuilder.ToString();
+    }
+
     public void Display(ISudokuModel model)
     {
-        throw new NotImplementedException();
+        int index = 0;
+        string[] values = new string[model.MaxSize * (model.MaxSize - 4) * 3 * 6];
+        for (int row = 0; row < model.MaxSize; row++)
+        {
+            for (int column = 0; column < model.MaxSize; column++)
+            {
+                string s = char.ToString(model[row, column]);
+                values[index] = s != "\0" ? s : " ";
+                index++;
+            }
+        }
+
+        Console.WriteLine(string.Format(_canva, values));
     }
 
     public void DisplayEmptyGrid()
