@@ -12,8 +12,15 @@ internal class SudokuModel9x9 : SudokuModel
     {
         bool isRowOutOfBand = row < 0 || row > MaxSize;
         bool isColumnOutOfBand = column < 0 || column > MaxSize;
-        bool isCellLocked = _values is not null && _values[row, column].IsLock;
 
-        return !isRowOutOfBand && !isColumnOutOfBand && !isCellLocked;
+        if (isRowOutOfBand || isColumnOutOfBand)
+        {
+            return false;
+        }
+        else
+        {
+            bool isCellLocked = _values is not null && _values[row, column].IsLock;
+            return !isCellLocked;
+        }
     }
 }
