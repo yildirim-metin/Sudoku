@@ -1,32 +1,20 @@
 ﻿namespace SudokuConsole.Model;
 
-internal class SudokuModelSamourai : ISudokuModel
+internal class SudokuModelSamourai : SudokuModel
 {
-    public short MaxSize => 21 * (21 - 4) * 3 * 6;
-    
-    private readonly Cell[,] _values;
-    public char this[int row, int column]
+    public override short MaxSize => 21 * (21 - 4) * 3 * 6;
+
+    public SudokuModelSamourai() : base()
     {
-        get
-        {
-            if (_values[row, column] is not null)
-            {
-                return _values[row, column].Value;
-            }
-            else
-            {
-                return ISudokuModel.EMPTY;
-            }
-        }
-        set
-        {
-            Cell cell = new(value, true);
-            _values[row, column] = cell;
-        }
     }
 
-    public SudokuModelSamourai()
+    public override void Init()
     {
-        _values = new Cell[MaxSize, MaxSize];
+        throw new NotImplementedException();
+    }
+
+    public override bool IsValid(int row, int column)
+    {
+        throw new NotImplementedException();
     }
 }

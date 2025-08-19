@@ -1,32 +1,19 @@
 ﻿namespace SudokuConsole.Model;
 
-internal class SudokuModel9x9 : ISudokuModel
+internal class SudokuModel9x9 : SudokuModel
 {
-    public short MaxSize => 9;
+    public override short MaxSize => 9;
 
-    private readonly Cell[,] _values;
-    public char this[int row, int column] 
+    public SudokuModel9x9() : base()
     {
-        get
-        {
-            if (_values[row, column] is not null)
-            {
-                return _values[row, column].Value;
-            }
-            else
-            {
-                return ISudokuModel.EMPTY;
-            }
-        }
-        set
-        {
-            Cell cell = new(value, true);
-            _values[row, column] = cell;
-        }
     }
 
-    public SudokuModel9x9()
+    public override bool IsValid(int row, int column)
     {
-        _values = new Cell[MaxSize, MaxSize];
+        bool isRowOutOfBand = row < 0 || row > MaxSize;
+        bool isColumnOutOfBand = column < 0 || column > MaxSize;
+        bool isCellLocked = _values is not null && _values[row, column].IsLock;
+
+        return !isRowOutOfBand && !isColumnOutOfBand && !isCellLocked;
     }
 }

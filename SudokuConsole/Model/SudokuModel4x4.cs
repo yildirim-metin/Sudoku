@@ -1,40 +1,19 @@
 ﻿namespace SudokuConsole.Model;
 
-internal class SudokuModel4x4 : ISudokuModel
+internal class SudokuModel4x4 : SudokuModel
 {
-    public short MaxSize => 4;
+    public override short MaxSize => 4;
 
-    private readonly Cell[,] _values;
-
-    public char this[int row, int column]
+    public SudokuModel4x4() : base()
     {
-        get
-        {
-            if (_values[row, column] is not null)
-            {
-                return _values[row, column].Value;
-            }
-            else
-            {
-                return ISudokuModel.EMPTY;
-            }
-        }
-        set
-        {
-            Cell cell = new(value, true);
-            _values[row, column] = cell;
-        }
     }
 
-    public SudokuModel4x4()
+    public override bool IsValid(int row, int column)
     {
-        _values = new Cell[MaxSize, MaxSize];
-        for (int i = 0; i < MaxSize; i++)
-        {
-            for (int j = 0; j < MaxSize; j++)
-            {
-                _values[i, j] = new Cell();
-            }
-        }
+        bool isRowOutOfBand = row < 0 || row > MaxSize;
+        bool isColumnOutOfBand = column < 0 || column > MaxSize;
+        bool isCellLocked = _values is not null && _values[row, column].IsLock;
+
+        return !isRowOutOfBand && !isColumnOutOfBand && !isCellLocked;
     }
 }
