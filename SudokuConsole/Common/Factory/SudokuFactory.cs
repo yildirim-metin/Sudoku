@@ -2,7 +2,7 @@
 using SudokuConsole.Model;
 using SudokuConsole.View;
 
-namespace SudokuConsole.Factory;
+namespace SudokuConsole.Common.Factory;
 
 internal abstract class SudokuFactory : ISudokuFactory
 {

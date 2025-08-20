@@ -1,17 +1,17 @@
 ﻿using SudokuConsole.Model;
 using SudokuConsole.View;
 
-namespace SudokuConsole.Factory;
+namespace SudokuConsole.Common.Factory;
 
-internal class SudokuFactory4x4 : SudokuFactory
+internal class SudokuFactorySamourai : SudokuFactory
 {
     protected override ISudokuModel CreateModel()
     {
-        return new SudokuModel4x4();
+        return new SudokuModelSamourai();
     }
 
     protected override ISudokuView CreateView()
     {
-        return new View4x4();
+        return new ViewSamourai();
     }
 }

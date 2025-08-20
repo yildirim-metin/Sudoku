@@ -1,6 +1,6 @@
 ﻿using SudokuConsole.Contoller;
 
-namespace SudokuConsole.Factory;
+namespace SudokuConsole.Common.Factory;
 
 internal interface ISudokuFactory
 {
