@@ -10,22 +10,15 @@ internal class SudokuModel9x9 : SudokuModel
 
     public override bool IsValid(int row, int column)
     {
-        bool isRowOutOfBand = row < 0 || row > MaxSize;
-        bool isColumnOutOfBand = column < 0 || column > MaxSize;
+        bool isRowOutOfBand = row < 0 || row >= MaxSize;
+        bool isColumnOutOfBand = column < 0 || column >= MaxSize;
 
-        if (isRowOutOfBand || isColumnOutOfBand)
-        {
-            return false;
-        }
-        else
-        {
-            bool isCellLocked = _values is not null && _values[row, column].IsLocked;
-            return !isCellLocked;
-        }
+        return !isRowOutOfBand && !isColumnOutOfBand;
     }
 
     public override bool IsValueValid(char value)
     {
-        throw new NotImplementedException();
+        char[] validValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        return validValues.Contains(value);
     }
 }

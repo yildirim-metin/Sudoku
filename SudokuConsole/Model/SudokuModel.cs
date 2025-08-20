@@ -57,7 +57,6 @@ internal abstract class SudokuModel : ISudokuModel
             }
         }
     }
-
     public abstract bool IsValid(int row, int column);
     public abstract bool IsValueValid(char value);
 }
