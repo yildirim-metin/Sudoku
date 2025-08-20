@@ -19,8 +19,13 @@ internal class SudokuModel9x9 : SudokuModel
         }
         else
         {
-            bool isCellLocked = _values is not null && _values[row, column].IsLock;
+            bool isCellLocked = _values is not null && _values[row, column].IsLocked;
             return !isCellLocked;
         }
+    }
+
+    public override bool IsValueValid(char value)
+    {
+        throw new NotImplementedException();
     }
 }

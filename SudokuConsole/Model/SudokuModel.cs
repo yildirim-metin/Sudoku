@@ -1,4 +1,6 @@
-﻿namespace SudokuConsole.Model;
+﻿using SudokuConsole.Common.Exception;
+
+namespace SudokuConsole.Model;
 
 internal abstract class SudokuModel : ISudokuModel
 {
@@ -22,8 +24,19 @@ internal abstract class SudokuModel : ISudokuModel
         {
             if (IsValid(row, column))
             {
-                Cell cell = new(value, true);
-                _values![row, column] = cell;
+                if (IsValueValid(value))
+                {
+                    Cell cell = new(value, true);
+                    _values![row, column] = cell;
+                }
+                else
+                {
+                    throw new ValueSudokuException();
+                }
+            }
+            else
+            {
+                throw new PositionSudokuException();
             }
         }
     }
@@ -46,4 +59,5 @@ internal abstract class SudokuModel : ISudokuModel
     }
 
     public abstract bool IsValid(int row, int column);
+    public abstract bool IsValueValid(char value);
 }

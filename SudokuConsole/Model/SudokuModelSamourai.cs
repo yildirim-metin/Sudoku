@@ -17,4 +17,9 @@ internal class SudokuModelSamourai : SudokuModel
     {
         throw new NotImplementedException();
     }
+
+    public override bool IsValueValid(char value)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -12,15 +12,13 @@ internal class SudokuModel4x4 : SudokuModel
     {
         bool isRowOutOfBand = row < 0 || row >= MaxSize;
         bool isColumnOutOfBand = column < 0 || column >= MaxSize;
-        
-        if (isRowOutOfBand || isColumnOutOfBand)
-        {
-            return false;
-        }
-        else
-        {
-            bool isCellLocked = _values is not null && _values[row, column].IsLock;
-            return !isCellLocked;
-        }
+
+        return !isRowOutOfBand && !isColumnOutOfBand;
+    }
+
+    public override bool IsValueValid(char value)
+    {
+        char[] validValues = ['1', '2', '3', '4'];
+        return validValues.Contains(value);
     }
 }
