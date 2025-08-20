@@ -1,7 +1,5 @@
 ﻿using SudokuConsole.Common;
-using SudokuConsole.Contoller;
-using SudokuConsole.Model;
-using SudokuConsole.View;
+using SudokuConsole.Common.Factory;
 
 Console.WriteLine("""
     Menu
@@ -42,29 +40,18 @@ while (isNumber && (gameChoice < 0 || gameChoice > 4))
 switch(game)
 {
     case "1":
-        SudokuController sudokuController = new()
-        {
-            View = new View4x4(),
-            Model = new SudokuModel4x4()
-        };
-
-        sudokuController.Start();
+        SudokuFactory4x4 factory4x4 = new();
+        factory4x4.CreateController().Start();
         break;
 
     case "2":
-        sudokuController = new()
-        {
-            View = new View9x9(),
-            Model = new SudokuModel9x9()
-        };
-        sudokuController.Start();
-
+        SudokuFactory9x9 factory9x9 = new();
+        factory9x9.CreateController().Start();
         break;
 
     case "3":
-        //sudokuController.View = new ViewSamourai();
-        //sudokuController.Model = new SudokuModelSamourai();
-        //sudokuController.Start();
+        //SudokuFactorySamourai factorySamourai = new();
+        //factorySamourai.CreateController().Start();
         Console.WriteLine("Pas encore implémenter");
         break;
 
