@@ -1,80 +1,72 @@
-﻿using SudokuConsole.Common;
-using SudokuConsole.Common.Factory;
+﻿using SudokuConsole.Common.Factory;
 
-Console.WriteLine("""
-    Menu
-    1. 4x4
-    2. 9x9
-    3. Samourai
-    4. Test binary
-    """);
-
-Console.Write("Quel sudoku tu souhaite jouer ? :");
-string? game = Console.ReadLine();
-
-bool isNumber = int.TryParse(game, out int gameChoice);
-while (!isNumber)
+Dictionary<string, ISudokuFactory> factories = new()
 {
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("Saisie invalide !");
-    Console.ForegroundColor = ConsoleColor.Gray;
+    {"4x4", new SudokuFactory4x4() },
+    {"9x9", new SudokuFactory9x9() },
+    {"Samourai", new SudokuFactorySamourai() },
+};
+
+int gameChoice = 0;
+
+while (gameChoice != factories.Count + 1)
+{
+    DisplayMenu();
 
     Console.Write("Quel sudoku tu souhaite jouer ? :");
+    string? game = Console.ReadLine();
 
-    game = Console.ReadLine();
-    isNumber = int.TryParse(game, out gameChoice);
+    bool isNumber = IsNumber(ref game, ref gameChoice);
+    ValidateGameChoice(factories.Count + 1, ref gameChoice, ref game, ref isNumber);
+
+    if (isNumber && gameChoice != factories.Count + 1)
+    {
+        Console.Clear();
+        ISudokuFactory factory = factories.ElementAt(gameChoice - 1).Value;
+        factory.CreateController().Start();
+    }
 }
 
-while (isNumber && (gameChoice < 0 || gameChoice > 4))
+void DisplayMenu()
 {
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("Choisis une valeur entre 1 et 3 !");
-    Console.ForegroundColor = ConsoleColor.Gray;
-
-    Console.Write("Quel sudoku tu souhaite jouer ? :");
-
-    game = Console.ReadLine();
-    isNumber = int.TryParse(game, out gameChoice);
+    Console.WriteLine("===== Menu =====");
+    for (int i = 0; i < factories.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {factories.ElementAt(i).Key}");
+    }
+    Console.WriteLine($"{factories.Count + 1}. Quitter");
+    Console.WriteLine("================");
 }
 
-switch(game)
+bool IsNumber(ref string? game, ref int gameChoice)
 {
-    case "1":
-        SudokuFactory4x4 factory4x4 = new();
-        factory4x4.CreateController().Start();
-        break;
+    bool isNumber = int.TryParse(game, out gameChoice);
+    while (!isNumber)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Saisie invalide !");
+        Console.ForegroundColor = ConsoleColor.Gray;
 
-    case "2":
-        SudokuFactory9x9 factory9x9 = new();
-        factory9x9.CreateController().Start();
-        break;
+        Console.Write("Quel sudoku tu souhaite jouer ? :");
 
-    case "3":
-        //SudokuFactorySamourai factorySamourai = new();
-        //factorySamourai.CreateController().Start();
-        Console.WriteLine("Pas encore implémenter");
-        break;
+        game = Console.ReadLine();
+        isNumber = int.TryParse(game, out gameChoice);
+    }
 
-    case "4":
-        Zone z = new();
-        Console.WriteLine(z);
-        z.Add(7);
-        z.Add(8);
-        Console.WriteLine(z);
-        z.Remove(3);
-        Console.WriteLine(z);
+    return isNumber;
+}
 
-        Zone z2 = new(); z2.Add(1); z2.Add(2);
-        Console.WriteLine(z2);
-        Zone z4 = z.Combine(z2);
-        Console.WriteLine(z4);
-        Console.WriteLine(z);
+void ValidateGameChoice(int maxValue, ref int gameChoice, ref string? game, ref bool isNumber)
+{
+    while (isNumber && (gameChoice < 0 || gameChoice > maxValue))
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine($"Choisis une valeur entre 1 et {factories.Count + 1} !");
+        Console.ForegroundColor = ConsoleColor.Gray;
 
-        Zone z3 = new(0b1111111111);
-        Zone z5 = z2.Combine(z3);
-        Console.WriteLine(z5);
-        break;
+        Console.Write("Quel sudoku tu souhaite jouer ? :");
 
-    default:
-        break;
+        game = Console.ReadLine();
+        isNumber = int.TryParse(game, out gameChoice);
+    }
 }
