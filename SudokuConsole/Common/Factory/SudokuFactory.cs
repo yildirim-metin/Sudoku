@@ -8,11 +8,7 @@ internal abstract class SudokuFactory : ISudokuFactory
 {
     public SudokuController CreateController()
     {
-        return new SudokuController()
-        {
-            Model = CreateModel(),
-            View = CreateView(),
-        };
+        return new SudokuController(CreateModel(), CreateView());
     }
 
     protected abstract ISudokuModel CreateModel();
